@@ -1,0 +1,23 @@
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# Dependency / build leftovers
+node_modules/
+vendor/
+dist/
+build/
+
+# Archives
+*.zip
+
+# Temporary/cache files
+*.cache
+*.tmp
+__pycache__/
+*.pyc
