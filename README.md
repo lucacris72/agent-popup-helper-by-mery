@@ -1,5 +1,7 @@
 # Agent PopUp Helper by Mery
 
+![Agent PopUp Helper by Mery cover](docs/images/agent-popup-helper-cover.png)
+
 WordPress plugin for embedding your OpenAI ChatKit agent in two display modes:
 
 - embedded chatbot via shortcode
