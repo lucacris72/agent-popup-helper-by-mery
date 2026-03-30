@@ -278,6 +278,13 @@
   transform: translateY(-1px);
 }
 
+.ml-chatbot--floating:not(.is-open) .ml-chatbot-ai__launcher,
+.ml-chatbot-ai--popup:not(.is-open) .ml-chatbot-ai__launcher,
+.ml-chatbot--floating:not(.is-open) .ml-chatbot-ai__launcher:hover,
+.ml-chatbot-ai--popup:not(.is-open) .ml-chatbot-ai__launcher:hover {
+  background: var(--ml-chatbot-primary);
+}
+
 .ml-chatbot--floating.is-open .ml-chatbot-ai__launcher,
 .ml-chatbot-ai--popup.is-open .ml-chatbot-ai__launcher {
   background: var(--ml-chatbot-primary-hover);
