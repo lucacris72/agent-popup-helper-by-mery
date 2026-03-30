@@ -59,6 +59,7 @@ class APH_Admin {
 		$this->add_field( 'brand_name', __( 'Brand name', 'ml-chatbot-ai' ), array( $this, 'render_text_field' ) );
 		$this->add_field( 'logo_id', __( 'Brand logo', 'ml-chatbot-ai' ), array( $this, 'render_logo_field' ) );
 		$this->add_field( 'theme_color', __( 'Theme color', 'ml-chatbot-ai' ), array( $this, 'render_color_field' ) );
+		$this->add_field( 'hover_color', __( 'Hover color', 'ml-chatbot-ai' ), array( $this, 'render_color_field' ) );
 		$this->add_field( 'title', __( 'Chatbot title', 'ml-chatbot-ai' ), array( $this, 'render_text_field' ) );
 	}
 
@@ -137,6 +138,8 @@ class APH_Admin {
 
 		$theme_color = isset( $input['theme_color'] ) ? sanitize_hex_color( (string) $input['theme_color'] ) : '';
 		$sanitized['theme_color'] = $theme_color ?: APH_Plugin::get_default_settings()['theme_color'];
+		$hover_color = isset( $input['hover_color'] ) ? sanitize_hex_color( (string) $input['hover_color'] ) : '';
+		$sanitized['hover_color'] = $hover_color ?: '';
 
 		$title = isset( $input['title'] ) ? sanitize_text_field( (string) $input['title'] ) : '';
 		$sanitized['title'] = '' !== $title ? $title : APH_Plugin::get_default_settings()['title'];
@@ -365,17 +368,54 @@ class APH_Admin {
 	public function render_color_field( array $args ) : void {
 		$settings = APH_Plugin::get_settings();
 		$key      = $args['key'];
+		$defaults = APH_Plugin::get_default_settings();
+		$value    = isset( $settings[ $key ] ) ? (string) $settings[ $key ] : '';
+		$default  = 'theme_color' === $key ? (string) $defaults['theme_color'] : $this->get_default_hover_color( $defaults );
 		?>
 		<input
 			type="text"
 			class="ml-chatbot-color-field"
 			name="<?php echo esc_attr( $this->option_name . '[' . $key . ']' ); ?>"
-			value="<?php echo esc_attr( (string) $settings[ $key ] ); ?>"
-			data-default-color="<?php echo esc_attr( APH_Plugin::get_default_settings()['theme_color'] ); ?>"
+			value="<?php echo esc_attr( $value ); ?>"
+			data-default-color="<?php echo esc_attr( $default ); ?>"
 		/>
-		<p class="description"><?php echo esc_html__( 'Main brand color. The chatbot gradients and accents are generated from this color.', 'ml-chatbot-ai' ); ?></p>
-		<p class="description"><?php echo esc_html__( 'Disclaimer: some very light colors may reduce contrast and readability.', 'ml-chatbot-ai' ); ?></p>
+		<?php if ( 'theme_color' === $key ) : ?>
+			<p class="description"><?php echo esc_html__( 'Main brand color. The chatbot gradients and accents are generated from this color.', 'ml-chatbot-ai' ); ?></p>
+			<p class="description"><?php echo esc_html__( 'Disclaimer: some very light colors may reduce contrast and readability.', 'ml-chatbot-ai' ); ?></p>
+		<?php elseif ( 'hover_color' === $key ) : ?>
+			<p class="description"><?php echo esc_html__( 'Optional custom hover color for the popup launcher button.', 'ml-chatbot-ai' ); ?></p>
+			<p class="description"><?php echo esc_html__( 'If left unchanged, the plugin uses an automatically generated darker shade of the theme color.', 'ml-chatbot-ai' ); ?></p>
+		<?php endif; ?>
 		<?php
+	}
+
+	private function get_default_hover_color( array $defaults ) : string {
+		$theme_color = isset( $defaults['theme_color'] ) ? sanitize_hex_color( (string) $defaults['theme_color'] ) : '';
+
+		if ( ! $theme_color ) {
+			$theme_color = '#1d4ed8';
+		}
+
+		return $this->adjust_color_brightness( $theme_color, -24 );
+	}
+
+	private function adjust_color_brightness( string $hex, int $steps ) : string {
+		$hex = ltrim( $hex, '#' );
+
+		if ( 3 === strlen( $hex ) ) {
+			$hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+		}
+
+		$steps  = max( -255, min( 255, $steps ) );
+		$colors = array();
+
+		for ( $i = 0; $i < 3; $i++ ) {
+			$color = hexdec( substr( $hex, $i * 2, 2 ) );
+			$color = max( 0, min( 255, $color + $steps ) );
+			$colors[] = str_pad( dechex( $color ), 2, '0', STR_PAD_LEFT );
+		}
+
+		return '#' . implode( '', $colors );
 	}
 
 }

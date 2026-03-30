@@ -21,7 +21,7 @@ Main features:
 * Floating popup mode
 * Shortcode mode with `[ml_chatbot]`
 * Popup open delay and device visibility controls
-* Brand name, logo, color, and title settings
+* Brand name, logo, theme color, hover color, and title settings
 * Modern responsive UI
 * No heavy frontend framework or build tooling
 * Simple WordPress filters for developer customization
@@ -53,7 +53,7 @@ Popup mode injects a floating launcher automatically in the site footer. Shortco
 
 = Can I customize the brand? =
 
-Yes. You can set a brand name, logo, color, and chatbot title from the admin settings page.
+Yes. You can set a brand name, logo, theme color, hover color, and chatbot title from the admin settings page.
 
 == Changelog ==
 

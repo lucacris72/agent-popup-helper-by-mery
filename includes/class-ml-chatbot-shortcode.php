@@ -104,7 +104,10 @@ class APH_Shortcode {
 		$logo_url      = $this->get_logo_url( $settings );
 		$brand_name    = trim( (string) $settings['brand_name'] );
 		$title         = (string) apply_filters( 'aph_chatbot_title', $settings['title'], $settings, $variant );
-		$inline_style  = $this->build_theme_css_variables( (string) $settings['theme_color'] );
+		$inline_style  = $this->build_theme_css_variables(
+			(string) $settings['theme_color'],
+			isset( $settings['hover_color'] ) ? (string) $settings['hover_color'] : ''
+		);
 		$root_classes  = 'ml-chatbot-ai ml-chatbot';
 		$popup_classes = '';
 		$is_active     = ! empty( $settings['enabled'] ) && ! empty( $settings['api_key'] ) && ! empty( $settings['workflow_id'] );
@@ -180,21 +183,24 @@ class APH_Shortcode {
 		return (string) wp_get_attachment_image_url( $logo_id, 'thumbnail' );
 	}
 
-	private function build_theme_css_variables( string $theme_color ) : string {
+	private function build_theme_css_variables( string $theme_color, string $hover_color = '' ) : string {
 		$theme_color = sanitize_hex_color( $theme_color );
+		$hover_color = sanitize_hex_color( $hover_color );
 
 		if ( ! $theme_color ) {
 			$theme_color = '#1d4ed8';
 		}
 
-		$primary_dark = $this->adjust_color_brightness( $theme_color, -24 );
-		$border       = $this->hex_to_rgba( $theme_color, 0.18 );
+		$primary_dark  = $this->adjust_color_brightness( $theme_color, -24 );
+		$primary_hover = $hover_color ?: $primary_dark;
+		$border        = $this->hex_to_rgba( $theme_color, 0.18 );
 
 		return implode(
 			';',
 			array(
 				'--ml-chatbot-primary:' . $theme_color,
 				'--ml-chatbot-primary-dark:' . $primary_dark,
+				'--ml-chatbot-primary-hover:' . $primary_hover,
 				'--ml-chatbot-border:' . $border,
 			)
 		);

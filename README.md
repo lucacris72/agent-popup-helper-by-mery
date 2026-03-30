@@ -38,6 +38,7 @@ The current codebase keeps the existing public keys for compatibility:
   - optional brand name
   - optional logo
   - theme color picker
+  - popup launcher hover color picker
 - AJAX backend with nonce validation
 - No API key exposure in the frontend
 - Small set of WordPress filters for developers
@@ -106,9 +107,11 @@ From the admin panel you can customize:
 - `Brand name`
 - `Brand logo`
 - `Theme color`
+- `Hover color`
 - `Chatbot title`
 
 The selected theme color is used to derive the chatbot accent styling automatically.
+You can override the popup launcher hover color with a dedicated setting, or leave the automatic darker shade.
 
 ## Notes and Disclaimers
 

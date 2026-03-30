@@ -64,6 +64,7 @@ class APH_Plugin {
 			'brand_name'          => '',
 			'logo_id'             => 0,
 			'theme_color'         => '#1d4ed8',
+			'hover_color'         => '',
 			'title'               => 'Agent PopUp Helper',
 		);
 	}
