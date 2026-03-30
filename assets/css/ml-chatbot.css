@@ -136,6 +136,7 @@
 .ml-chatbot-ai__close {
   align-items: center;
   background: transparent;
+  border-radius: 999px;
   border: 0;
   color: var(--ml-chatbot-muted);
   cursor: pointer;
@@ -144,7 +145,15 @@
   justify-content: center;
   line-height: 1;
   padding: 0;
+  transition: background-color 0.18s ease, color 0.18s ease;
   width: 32px;
+}
+
+.ml-chatbot-ai__close:hover,
+.ml-chatbot-ai__close:focus-visible {
+  background: var(--ml-chatbot-primary-hover);
+  color: #fff;
+  outline: none;
 }
 
 .ml-chatbot-ai-unavailable {
@@ -267,6 +276,11 @@
   background: var(--ml-chatbot-primary-hover);
   box-shadow: 0 22px 48px rgba(15, 23, 42, 0.24);
   transform: translateY(-1px);
+}
+
+.ml-chatbot--floating.is-open .ml-chatbot-ai__launcher,
+.ml-chatbot-ai--popup.is-open .ml-chatbot-ai__launcher {
+  background: var(--ml-chatbot-primary-hover);
 }
 
 .ml-chatbot-ai__launcher-logo {
