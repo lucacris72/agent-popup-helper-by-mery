@@ -58,6 +58,8 @@ class APH_Plugin {
 			'popup_open_delay'    => 0,
 			'popup_visibility'    => 'all',
 			'popup_show_label'    => 1,
+			'chatkit_history_enabled'  => 1,
+			'chatkit_feedback_enabled' => 0,
 			'api_key'             => '',
 			'workflow_id'         => '',
 			'workflow_version'    => '',

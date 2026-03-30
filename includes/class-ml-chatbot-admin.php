@@ -56,6 +56,9 @@ class APH_Admin {
 		$this->add_field( 'api_key', __( 'OpenAI API key', 'ml-chatbot-ai' ), array( $this, 'render_api_key_field' ) );
 		$this->add_field( 'workflow_id', __( 'Workflow ID', 'ml-chatbot-ai' ), array( $this, 'render_text_field' ) );
 		$this->add_field( 'workflow_version', __( 'Workflow version', 'ml-chatbot-ai' ), array( $this, 'render_text_field' ) );
+		$this->add_field( 'chatkit_history_enabled', __( 'Chat history', 'ml-chatbot-ai' ), array( $this, 'render_checkbox_field' ) );
+		$this->add_field( 'chatkit_feedback_enabled', __( 'Feedback buttons', 'ml-chatbot-ai' ), array( $this, 'render_checkbox_field' ) );
+		$this->add_field( 'chatkit_reasoning_note', __( 'Model reasoning', 'ml-chatbot-ai' ), array( $this, 'render_chatkit_reasoning_note' ) );
 		$this->add_field( 'brand_name', __( 'Brand name', 'ml-chatbot-ai' ), array( $this, 'render_text_field' ) );
 		$this->add_field( 'logo_id', __( 'Brand logo', 'ml-chatbot-ai' ), array( $this, 'render_logo_field' ) );
 		$this->add_field( 'theme_color', __( 'Theme color', 'ml-chatbot-ai' ), array( $this, 'render_color_field' ) );
@@ -116,6 +119,8 @@ class APH_Admin {
 			'all'
 		);
 		$sanitized['popup_show_label'] = empty( $input['popup_show_label'] ) ? 0 : 1;
+		$sanitized['chatkit_history_enabled']  = empty( $input['chatkit_history_enabled'] ) ? 0 : 1;
+		$sanitized['chatkit_feedback_enabled'] = empty( $input['chatkit_feedback_enabled'] ) ? 0 : 1;
 
 		$api_key = isset( $input['api_key'] ) ? trim( (string) $input['api_key'] ) : '';
 		$sanitized['api_key'] = '' !== $api_key ? sanitize_text_field( $api_key ) : $current['api_key'];
@@ -241,9 +246,20 @@ class APH_Admin {
 				echo esc_html__( 'Enable the chatbot on the frontend.', 'ml-chatbot-ai' );
 			} elseif ( 'popup_show_label' === $key ) {
 				echo esc_html__( 'Show text next to the launcher icon on larger screens.', 'ml-chatbot-ai' );
+			} elseif ( 'chatkit_history_enabled' === $key ) {
+				echo esc_html__( 'Allow visitors to browse previous chat threads inside the ChatKit history panel.', 'ml-chatbot-ai' );
+			} elseif ( 'chatkit_feedback_enabled' === $key ) {
+				echo esc_html__( 'Show the thumbs up / thumbs down buttons on assistant responses.', 'ml-chatbot-ai' );
 			}
 			?>
 		</label>
+		<?php
+	}
+
+	public function render_chatkit_reasoning_note() : void {
+		?>
+		<p class="description"><?php echo esc_html__( 'OpenAI ChatKit does not currently expose a documented public option to hide model reasoning from this hosted integration.', 'ml-chatbot-ai' ); ?></p>
+		<p class="description"><?php echo esc_html__( 'If OpenAI adds a stable setting for it, this plugin can support it in a future update.', 'ml-chatbot-ai' ); ?></p>
 		<?php
 	}
 

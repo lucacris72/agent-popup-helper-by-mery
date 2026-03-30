@@ -33,6 +33,9 @@ The current codebase keeps the existing public keys for compatibility:
   - desktop only
   - mobile only
 - Optional launcher text toggle
+- ChatKit UI controls:
+  - chat history toggle
+  - feedback buttons toggle
 - Brand customization:
   - chatbot title
   - optional brand name
@@ -118,6 +121,8 @@ You can override the popup launcher hover color with a dedicated setting, or lea
 - If you use `Floating popup` mode, do not rely on `[ml_chatbot]` for the popup UI.
 - Theme color, logo, and brand name affect only the chatbot UI, not the WordPress theme.
 - Very light colors may reduce contrast and readability.
+- ChatKit history and feedback buttons can be enabled or disabled from the plugin settings.
+- Hiding model reasoning is not currently exposed as a documented public ChatKit option in this hosted integration.
 
 ## How ChatKit Works
 

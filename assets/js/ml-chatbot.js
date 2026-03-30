@@ -178,6 +178,12 @@
               );
             },
           },
+          history: {
+            enabled: mlChatbotConfig.chatkit?.historyEnabled !== false,
+          },
+          threadItemActions: {
+            feedback: Boolean(mlChatbotConfig.chatkit?.feedbackEnabled),
+          },
         });
       } catch (error) {
         console.error("[Agent PopUp Helper] ChatKit init failed", error);

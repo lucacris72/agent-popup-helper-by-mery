@@ -3,7 +3,7 @@ Contributors: MarianoAkaMery
 Tags: openai, chatbot, ai, popup, shortcode, wordpress
 Requires at least: 6.0
 Requires PHP: 8.0
-Stable tag: 1.2.9
+Stable tag: 1.3.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -21,6 +21,7 @@ Main features:
 * Floating popup mode
 * Shortcode mode with `[ml_chatbot]`
 * Popup open delay and device visibility controls
+* ChatKit history and feedback button toggles
 * Brand name, logo, theme color, hover color, and title settings
 * Modern responsive UI
 * No heavy frontend framework or build tooling
@@ -57,16 +58,17 @@ Yes. You can set a brand name, logo, theme color, hover color, and chatbot title
 
 == Changelog ==
 
-= 1.2.9 =
+= 1.3.0 =
 
 * Production-ready cleanup after ChatKit integration debugging
 * Improved ChatKit container rendering
 * Better admin guidance and configuration status
 * Added developer filters and release-ready metadata
 * Added popup delay, visibility, and launcher text controls
+* Added ChatKit toggles for history and feedback buttons
 
 == Upgrade Notice ==
 
-= 1.2.9 =
+= 1.3.0 =
 
-This version improves popup controls and keeps the plugin positioning focused on OpenAI ChatKit agents for WordPress.
+This version adds ChatKit controls for history and feedback buttons, with the related admin update.

@@ -88,6 +88,8 @@ class APH_Shortcode {
 					'refreshAction' => 'ml_chatbot_refresh_session',
 					'popupOpenDelay' => isset( $settings['popup_open_delay'] ) ? (int) $settings['popup_open_delay'] : 0,
 					'popupVisibility' => isset( $settings['popup_visibility'] ) ? (string) $settings['popup_visibility'] : 'all',
+					'historyEnabled' => ! empty( $settings['chatkit_history_enabled'] ),
+					'feedbackEnabled' => ! empty( $settings['chatkit_feedback_enabled'] ),
 				),
 				'status'    => array(
 					'isActive' => $is_active,
